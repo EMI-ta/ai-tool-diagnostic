@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成AIツール診断</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f1f7ff;
+            border-radius: 8px;
+        }
+        .question-group {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        input[type="checkbox"], input[type="radio"] {
+            margin-right: 10px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #4b7bec;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #3867d6;
+        }
+        #results {
+            display: none;
+            margin-top: 30px;
+        }
+        .tool-card {
+            background-color: white;
+            border-left: 5px solid #4b7bec;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .tool-name {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        .tool-description {
+            margin-bottom: 10px;
+        }
+        .tool-use-cases {
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>生成AIツール診断</h1>
+        <p>あなたの職業や目標に合わせた最適な生成AIツールを診断します。以下の質問に回答してください。</p>
+
+        <div class="section">
+            <h2>基本情報</h2>
+            <div class="question-group">
+                <label for="profession">あなたの職種・部署を選択してください：</label>
+                <select id="profession">
+                    <option value="">選択してください</option>
+                    <option value="marketing">マーケティング部門</option>
+                    <option value="sales">営業部門</option>
+                    <option value="hr">人事部門</option>
+                    <option value="it">IT/開発部門</option>
+                    <option value="design">デザイン部門</option>
+                    <option value="finance">経理/財務部門</option>
+                    <option value="management">経営/管理職</option>
+                    <option value="research">研究開発部門</option>
+                    <option value="customer">カスタマーサポート</option>
+                    <option value="education">教育/トレーニング</option>
+                    <option value="other">その他</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>実現したいこと</h2>
+            
+            <div class="question-group">
+                <h3>テキスト/コンテンツ作成</h3>
+                <label><input type="checkbox" name="goal" value="text_writing"> 文章やコンテンツの作成を効率化したい</label>
+                <label><input type="checkbox" name="goal" value="text_summarize"> 長文を要約してポイントを抽出したい</label>
+                <label><input type="checkbox" name="goal" value="text_translate"> 多言語対応の翻訳をスムーズに行いたい</label>
+                <label><input type="checkbox" name="goal" value="text_idea"> アイデア出しやブレインストーミングをサポートしてほしい</label>
+                <label><input type="checkbox" name="goal" value="text_edit"> 既存の文章を編集・改善したい</label>
+            </div>
+
+            <div class="question-group">
+                <h3>画像/デザイン</h3>
+                <label><input type="checkbox" name="goal" value="image_create"> アイデアから画像やイラストを生成したい</label>
+                <label><input type="checkbox" name="goal" value="image_edit"> 既存の画像を編集・加工したい</label>
+                <label><input type="checkbox" name="goal" value="design_ui"> UIデザインやワイヤーフレームを作成したい</label>
+                <label><input type="checkbox" name="goal" value="design_logo"> ロゴやブランドアセットのアイデアが欲しい</label>
+            </div>
+
+            <div class="question-group">
+                <h3>音声/動画</h3>
+                <label><input type="checkbox" name="goal" value="audio_transcribe"> 音声をテキストに書き起こしたい</label>
+                <label><input type="checkbox" name="goal" value="audio_create"> 音声ナレーションやボイスオーバーを生成したい</label>
+                <label><input type="checkbox" name="goal" value="video_edit"> 動画編集や作成を効率化したい</label>
+            </div>
+
+            <div class="question-group">
+                <h3>データ/分析</h3>
+                <label><input type="checkbox" name="goal" value="data_analyze"> データ分析や可視化をサポートしてほしい</label>
+                <label><input type="checkbox" name="goal" value="data_research"> リサーチや情報収集を効率化したい</label>
+                <label><input type="checkbox" name="goal" value="data_insight"> データからインサイトやトレンドを抽出したい</label>
+            </div>
+
+            <div class="question-group">
+                <h3>プログラミング/開発</h3>
+                <label><input type="checkbox" name="goal" value="code_write"> コードの作成やデバッグをサポートしてほしい</label>
+                <label><input type="checkbox" name="goal" value="code_explain"> 既存のコードを理解・説明してほしい</label>
+                <label><input type="checkbox" name="goal" value="code_improve"> コードの最適化や改善提案が欲しい</label>
+            </div>
+
+            <div class="question-group">
+                <h3>コミュニケーション/チームワーク</h3>
+                <label><input type="checkbox" name="goal" value="comm_meeting"> 会議の効率化や議事録作成をサポートしてほしい</label>
+                <label><input type="checkbox" name="goal" value="comm_collaboration"> チーム間のコラボレーションを促進したい</label>
+                <label><input type="checkbox" name="goal" value="comm_customer"> 顧客とのコミュニケーションを向上させたい</label>
+            </div>
+
+            <div class="question-group">
+                <h3>学習/スキル開発</h3>
+                <label><input type="checkbox" name="goal" value="learn_personal"> 個人的なスキルアップや学習をサポートしてほしい</label>
+                <label><input type="checkbox" name="goal" value="learn_team"> チームのトレーニングや教育を効率化したい</label>
+            </div>
+        </div>
+
+        <button id="diagnose-btn">診断する</button>
+
+        <div id="results">
+            <h2>あなたにおすすめの生成AIツール</h2>
+            <div id="tool-recommendations"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('diagnose-btn').addEventListener('click', function() {
+            const profession = document.getElementById('profession').value;
+            
+            if (!profession) {
+                alert('職種・部署を選択してください。');
+                return;
+            }
+
+            const selectedGoals = [];
+            document.querySelectorAll('input[name="goal"]:checked').forEach(function(checkbox) {
+                selectedGoals.push(checkbox.value);
+            });
+            
+            if (selectedGoals.length === 0) {
+                alert('実現したいことを少なくとも1つ選択してください。');
+                return;
+            }
+            
+            // ツールのマッピング定義
+            const toolRecommendations = {
+                // テキスト/コンテンツ作成ツール
+                text_writing: {
+                    name: "ChatGPT / Claude / Gemini Pro",
+                    description: "文章作成、アイデア展開、コンテンツ生成に優れた大規模言語モデル",
+                    useCases: "レポート作成、メール文面、企画書、ブログ記事、SNS投稿など幅広いテキスト生成に対応"
+                },
+                text_summarize: {
+                    name: "Claude / ChatGPT",
+                    description: "長文要約と重要ポイント抽出に強いAIアシスタント",
+                    useCases: "会議録、研究論文、長文レポートなどの要約、重要ポイントの抽出"
+                },
+                text_translate: {
+                    name: "DeepL / ChatGPT",
+                    description: "高品質な多言語翻訳を提供するAIツール",
+                    useCases: "ビジネス文書、マニュアル、マーケティング資料など様々な文書の多言語化"
+                },
+                text_idea: {
+                    name: "Claude / ChatGPT / Notion AI",
+                    description: "アイデア創出とブレインストーミングをサポートするAIツール",
+                    useCases: "プロジェクト企画、マーケティングキャンペーン、問題解決策の発想"
+                },
+                text_edit: {
+                    name: "Grammarly / ChatGPT / Microsoft Copilot",
+                    description: "文章編集、校正、スタイル改善に特化したAIツール",
+                    useCases: "ビジネス文書の校正、トーン調整、読みやすさの向上"
+                },
+                
+                // 画像/デザイン関連ツール
+                image_create: {
+                    name: "DALL-E / Midjourney / Stable Diffusion",
+                    description: "テキストプロンプトから高品質な画像を生成するAIツール",
+                    useCases: "マーケティング素材、プレゼン資料、SNS投稿用画像、コンセプトアート"
+                },
+                image_edit: {
+                    name: "Adobe Firefly / Canva AI",
+                    description: "AIを活用した画像編集・加工ツール",
+                    useCases: "既存画像の拡張、背景変更、スタイル変換、要素の追加・削除"
+                },
+                design_ui: {
+                    name: "Uizard / Galileo AI",
+                    description: "AIを活用したUIデザイン・プロトタイピングツール",
+                    useCases: "ウェブサイト、アプリのデザイン、ワイヤーフレーム作成、プロトタイピング"
+                },
+                design_logo: {
+                    name: "Looka / DALL-E",
+                    description: "ロゴデザインやブランドアセット生成に特化したAIツール",
+                    useCases: "会社ロゴ、プロジェクトロゴ、ブランドアイデンティティ要素の作成"
+                },
+                
+                // 音声/動画関連ツール
+                audio_transcribe: {
+                    name: "Whisper / Otter.ai",
+                    description: "高精度な音声認識と文字起こしを提供するAIツール",
+                    useCases: "会議録、インタビュー、講演、ポッドキャストの書き起こし"
+                },
+                audio_create: {
+                    name: "ElevenLabs / Murf.ai",
+                    description: "自然で表現力豊かな音声合成AIツール",
+                    useCases: "ナレーション、製品デモ、eラーニング、動画ボイスオーバー"
+                },
+                video_edit: {
+                    name: "Runway ML / Descript",
+                    description: "AIを活用した動画編集・生成ツール",
+                    useCases: "動画編集、エフェクト追加、背景除去、自動字幕生成"
+                },
+                
+                // データ/分析関連ツール
+                data_analyze: {
+                    name: "ChatGPT Code Interpreter / Tableau AI",
+                    description: "データ分析と可視化をサポートするAIツール",
+                    useCases: "データ探索、統計分析、レポート作成、ビジュアライゼーション"
+                },
+                data_research: {
+                    name: "Perplexity / You.com / Bing AI",
+                    description: "AIを活用したリサーチと情報探索ツール",
+                    useCases: "市場調査、競合分析、最新トレンド調査、情報収集"
+                },
+                data_insight: {
+                    name: "Microsoft Copilot / Claude / DataBot",
+                    description: "データからインサイトを抽出するAI分析ツール",
+                    useCases: "トレンド分析、パターン認識、予測モデリング、レポート作成"
+                },
+                
+                // プログラミング/開発関連ツール
+                code_write: {
+                    name: "GitHub Copilot / Amazon CodeWhisperer",
+                    description: "コード生成と開発をサポートするAIアシスタント",
+                    useCases: "コード作成、バグ修正、プログラミング学習、開発効率化"
+                },
+                code_explain: {
+                    name: "ChatGPT / Cursor / Claude",
+                    description: "コード解説と理解をサポートするAIツール",
+                    useCases: "既存コードの解説、ドキュメント生成、コードロジックの説明"
+                },
+                code_improve: {
+                    name: "GitHub Copilot / DeepCode / CodeGuru",
+                    description: "コード最適化と品質向上をサポートするAIツール",
+                    useCases: "リファクタリング、パフォーマンス最適化、セキュリティ強化"
+                },
+                
+                // コミュニケーション/チームワーク関連ツール
+                comm_meeting: {
+                    name: "Otter.ai / Microsoft Copilot / Fireflies.ai",
+                    description: "会議記録と効率化をサポートするAIツール",
+                    useCases: "会議の自動録音・文字起こし、要約、タスク抽出、フォローアップ作成"
+                },
+                comm_collaboration: {
+                    name: "Notion AI / Coda AI / Microsoft Copilot",
+                    description: "チームコラボレーションを強化するAIツール",
+                    useCases: "共同文書作成、プロジェクト管理、情報整理、意思決定支援"
+                },
+                comm_customer: {
+                    name: "Intercom / Drift / ChatGPT API",
+                    description: "顧客コミュニケーションを強化するAIツール",
+                    useCases: "カスタマーサポート、FAQ対応、リードジェネレーション、問い合わせ対応"
+                },
+                
+                // 学習/スキル開発関連ツール
+                learn_personal: {
+                    name: "ChatGPT / Duolingo Max / Coursera AI",
+                    description: "個人学習とスキル開発をサポートするAIツール",
+                    useCases: "パーソナライズド学習、質問回答、コンテンツ理解、スキル習得"
+                },
+                learn_team: {
+                    name: "360Learning / EdApp / Workday Learning",
+                    description: "チーム教育とトレーニングをサポートするAIツール",
+                    useCases: "トレーニング資料作成、学習進捗管理、スキルギャップ分析、知識共有"
+                }
+            };
+            
+            // 職種別に特に役立つツール
+            const professionSpecificTools = {
+                marketing: {
+                    name: "MarketMuse / Jasper / SurferSEO",
+                    description: "マーケティング専用のコンテンツ最適化AIツール",
+                    useCases: "SEO対策、コンテンツ戦略、オーディエンス分析、コピーライティング"
+                },
+                sales: {
+                    name: "Gong.io / Lavender / Crystal",
+                    description: "営業活動を強化するAIツール",
+                    useCases: "メール最適化、商談分析、見込み客のパーソナライズ、営業トークスクリプト作成"
+                },
+                hr: {
+                    name: "HireVue / Eightfold / Textio",
+                    description: "採用・人事業務を効率化するAIツール",
+                    useCases: "候補者スクリーニング、職務記述書最適化、従業員エンゲージメント分析"
+                },
+                it: {
+                    name: "OpsGenie / Datadog / Dynatrace",
+                    description: "IT運用を最適化するAIツール",
+                    useCases: "インシデント予測、異常検知、パフォーマンス最適化、セキュリティ分析"
+                },
+                design: {
+                    name: "Figma AI / Adobe Sensei / Khroma",
+                    description: "デザイン作業を強化するAIツール",
+                    useCases: "デザインシステム生成、配色提案、レイアウト最適化、スタイル適用"
+                },
+                finance: {
+                    name: "DataRobot / Kensho / Sift",
+                    description: "財務・会計業務をサポートするAIツール",
+                    useCases: "財務予測、不正検知、リスク分析、投資判断支援"
+                },
+                management: {
+                    name: "Asana AI / Monday.ai / Forecast",
+                    description: "マネジメント業務を効率化するAIツール",
+                    useCases: "プロジェクト計画、リソース配分、進捗予測、意思決定支援"
+                },
+                research: {
+                    name: "Elicit / Semantic Scholar / Iris.ai",
+                    description: "研究開発をサポートするAIツール",
+                    useCases: "文献調査、実験計画、データ分析、論文作成支援"
+                },
+                customer: {
+                    name: "Zendesk AI / Kustomer / Ada",
+                    description: "カスタマーサポートを強化するAIツール",
+                    useCases: "問い合わせ自動対応、感情分析、FAQ自動化、顧客満足度予測"
+                },
+                education: {
+                    name: "Gradescope / Century / Khan Academy Khanmigo",
+                    description: "教育・トレーニングを強化するAIツール",
+                    useCases: "カリキュラム開発、自動採点、学習進捗追跡、パーソナライズド学習"
+                }
+            };
+            
+            // 結果を表示するための準備
+            const resultsDiv = document.getElementById('results');
+            const recommendationsDiv = document.getElementById('tool-recommendations');
+            recommendationsDiv.innerHTML = '';
+            
+            // 選択された目標に基づいてツールを推薦
+            const recommendedTools = new Set();
+            selectedGoals.forEach(goal => {
+                if (toolRecommendations[goal]) {
+                    recommendedTools.add(JSON.stringify(toolRecommendations[goal]));
+                }
+            });
+            
+            // 職種別の特別なツール推薦を追加
+            if (professionSpecificTools[profession]) {
+                recommendedTools.add(JSON.stringify(professionSpecificTools[profession]));
+            }
+            
+            // ツール推薦を表示
+            if (recommendedTools.size > 0) {
+                recommendedTools.forEach(toolJson => {
+                    const tool = JSON.parse(toolJson);
+                    const toolCard = document.createElement('div');
+                    toolCard.className = 'tool-card';
+                    toolCard.innerHTML = `
+                        <div class="tool-name">${tool.name}</div>
+                        <div class="tool-description">${tool.description}</div>
+                        <div class="tool-use-cases"><strong>ユースケース:</strong> ${tool.useCases}</div>
+                    `;
+                    recommendationsDiv.appendChild(toolCard);
+                });
+            } else {
+                recommendationsDiv.innerHTML = '<p>選択された条件に合うツールが見つかりませんでした。別の条件を試してください。</p>';
+            }
+            
+            resultsDiv.style.display = 'block';
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
