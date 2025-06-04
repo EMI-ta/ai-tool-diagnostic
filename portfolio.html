@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance Designer Portfolio</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+        a { color: #FF6B6B; text-decoration: none; }
+        header {
+            background: #000;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        header h1 { margin: 0; font-size: 2rem; }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            padding: 1rem;
+        }
+        .section {
+            background: #111;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+        .works {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        .work-item {
+            background: #222;
+            padding: 0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .work-item img {
+            width: 100%;
+            display: block;
+        }
+        .contact a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 1px solid #FF6B6B;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+            }
+            .works {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Freelance Designer Portfolio</h1>
+    </header>
+    <div class="container">
+        <section class="section profile">
+            <h2>About Me</h2>
+            <p>フリーランスデザイナーとして、Webデザインやグラフィックデザインを中心に活動しています。シンプルで使いやすいデザインが得意です。</p>
+        </section>
+        <section class="section works">
+            <h2>Works</h2>
+            <div class="work-item">
+                <img src="https://via.placeholder.com/600x400?text=Work+1" alt="Work 1">
+            </div>
+            <div class="work-item">
+                <img src="https://via.placeholder.com/600x400?text=Work+2" alt="Work 2">
+            </div>
+        </section>
+        <section class="section contact">
+            <h2>Contact</h2>
+            <p>お仕事のご依頼やご相談はこちらからお願いします。</p>
+            <a href="mailto:designer@example.com">メールする</a>
+        </section>
+    </div>
+</body>
+</html>
